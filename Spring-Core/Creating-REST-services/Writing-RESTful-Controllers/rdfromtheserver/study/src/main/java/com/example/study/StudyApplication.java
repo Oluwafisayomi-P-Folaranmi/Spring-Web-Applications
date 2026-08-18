@@ -6,17 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class StudyApplication {
+public class StudyApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		SpringApplication.run(StudyApplication.class, args);
 	}
 
-    @Bean
-    public CommandLineRunner runner() {
-        return args -> {
-            System.out.println("Application started!");
-            System.out.println("Arguments: ");
-        };
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("Good morning Jesus.");
     }
 }
