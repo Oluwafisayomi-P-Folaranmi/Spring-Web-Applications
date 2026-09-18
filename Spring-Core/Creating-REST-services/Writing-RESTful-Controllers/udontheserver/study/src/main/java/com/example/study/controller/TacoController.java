@@ -39,4 +39,31 @@ public class TacoController {
         }
         return new ResponseEntity<>(taco.get(), HttpStatus.FOUND); // if present
     }
+
+    @PostMapping(path = "/taco", consumes = "application/json")
+    public ResponseEntity<Taco> saveTaco(@RequestBody Taco taco) {
+        Optional<Taco> saved = tacoService.save(taco);
+        if (saved.isEmpty()) { // if null
+            throw new RuntimeException("Nothing is saved.");
+        }
+        return new ResponseEntity<>(saved.get(), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/taco/{id}", produces = "application/json")
+    public ResponseEntity<Taco> putTaco(@PathVariable("id") Long id, @RequestBody Taco taco) {
+        Optional<Taco> put = tacoService.saveUpdate(id, taco);
+        if (put.isEmpty()) {
+            throw new RuntimeException("Not put yet.");
+        }
+        return new ResponseEntity<>(put.get(), HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/taco/{id}", produces = "application/json")
+    public ResponseEntity<Taco> patchTaco(@PathVariable("id") Long id, @RequestBody Taco taco) {
+        Optional<Taco> patch = tacoService.saveUpdate(id, taco);
+        if (patch.isEmpty()) {
+            throw new RuntimeException("Not patched yet.");
+        }
+        return new ResponseEntity<>(patch.get(), HttpStatus.OK);
+    }
 }

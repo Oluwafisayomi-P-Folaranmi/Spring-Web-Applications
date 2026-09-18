@@ -39,4 +39,13 @@ public class TacoController {
         }
         return new ResponseEntity<>(taco.get(), HttpStatus.FOUND); // if present
     }
+
+    @PostMapping(path = "/taco", consumes = "application/json")
+    public ResponseEntity<Taco> saveTaco(@RequestBody Taco taco) {
+        Optional<Taco> saved = tacoService.save(taco);
+        if (saved.isEmpty()) { // if null
+            throw new RuntimeException("Nothing is saved.");
+        }
+        return new ResponseEntity<>(saved.get(), HttpStatus.CREATED);
+    }
 }

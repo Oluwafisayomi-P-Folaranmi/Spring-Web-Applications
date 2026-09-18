@@ -20,6 +20,11 @@ public class TacoRepository {
         return tacos.get(Math.toIntExact(id));
     }
 
+    public Taco save(Taco taco) {
+        tacos.add(taco);
+        return taco;
+    }
+
     /** -------------------------------- Initialise tacos -------------------------------- */
     public static List<Taco> initialiseList() {
         // Create a list of Tacos

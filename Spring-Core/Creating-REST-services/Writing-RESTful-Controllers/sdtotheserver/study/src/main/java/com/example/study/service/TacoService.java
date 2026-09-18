@@ -33,4 +33,12 @@ public class TacoService {
         }
         return Optional.empty();
     }
+
+    public Optional<Taco> save(Taco taco) {
+        Taco saved = tacoRepository.save(taco);
+        if (saved == null) { // if null
+            return Optional.empty();
+        }
+        return Optional.of(saved); // if not null
+    }
 }
